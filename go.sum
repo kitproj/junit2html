@@ -1,0 +1,4 @@
+github.com/jstemmer/go-junit-report v1.0.0 h1:8X1gzZpR+nVQLAht+L/foqOeX2l9DTZoaIPbEQHxsds=
+github.com/jstemmer/go-junit-report v1.0.0/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/XSXhF0NWZEnDohbsk=
+github.com/jstemmer/go-junit-report v1.0.1-0.20220306230355-2a37e36ac673 h1:ftQy+5SFsl1wHvJFoqJ5qQnNDjW7RzYylm0Vgkusi0s=
+github.com/jstemmer/go-junit-report v1.0.1-0.20220306230355-2a37e36ac673/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/XSXhF0NWZEnDohbsk=
