@@ -1,0 +1,38 @@
+?   	github.com/alexec/junit2html	[no test files]
+=== RUN   TestPassing
+2022/05/06 13:40:57 ok
+--- PASS: TestPassing (0.00s)
+=== RUN   TestFailing
+    example_test.go:10: this test failed
+--- FAIL: TestFailing (0.00s)
+=== RUN   TestSkipped
+    example_test.go:14: this test is skipped
+--- SKIP: TestSkipped (0.00s)
+=== RUN   TestPanic
+--- FAIL: TestPanic (0.00s)
+panic: kaboom! [recovered]
+	panic: kaboom!
+
+goroutine 7 [running]:
+testing.tRunner.func1.2({0x10fe520, 0x114a750})
+	/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1389 +0x24e
+testing.tRunner.func1()
+	/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1392 +0x39f
+panic({0x10fe520, 0x114a750})
+	/usr/local/Cellar/go/1.18.1/libexec/src/runtime/panic.go:838 +0x207
+github.com/alexec/junit2html/example.kaboom(...)
+	/Users/acollins8/go/src/github.com/alexec/junit2html/example/example.go:10
+github.com/alexec/junit2html/example.TestPanic(0x0?)
+	/Users/acollins8/go/src/github.com/alexec/junit2html/example/example_test.go:18 +0x31
+testing.tRunner(0xc000120820, 0x1129578)
+	/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1439 +0x102
+created by testing.(*T).Run
+	/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1486 +0x35f
+FAIL	github.com/alexec/junit2html/example	0.129s
+=== RUN   TestCoverage
+2022/05/06 13:31:17 foo
+--- PASS: TestCoverage (0.00s)
+PASS
+coverage: 50.0% of statements
+ok  	github.com/alexec/junit2html/example/coverage	(cached)	coverage: 50.0% of statements
+FAIL

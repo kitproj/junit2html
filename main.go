@@ -1,11 +1,44 @@
 package main
 
 import (
+	_ "embed"
 	"encoding/xml"
 	"fmt"
-	"github.com/jstemmer/go-junit-report/formatter"
 	"os"
+	"strconv"
+	"strings"
+	"time"
+
+	"github.com/jstemmer/go-junit-report/formatter"
 )
+
+//go:embed style.css
+var styles string
+
+func printTest(s formatter.JUnitTestSuite, c formatter.JUnitTestCase) {
+	id := fmt.Sprintf("%s.%s.%s", s.Name, c.Classname, c.Name)
+	class, text := "passed", "Pass"
+	f := c.Failure
+	if f != nil {
+		class, text = "failed", "Fail"
+	}
+	k := c.SkipMessage
+	if k != nil {
+		class, text = "skipped", "Skip"
+	}
+	fmt.Printf("<div class='%s'>\n", class)
+	fmt.Printf("<a href='#%s'>%s <span class='badge'>%s</span></a>\n", id, c.Name, text)
+	fmt.Printf("<div class='expando' id='%s'>\n", id)
+	if f != nil {
+		fmt.Printf("<div class='content'>%s</div>\n", f.Contents)
+	} else if k != nil {
+		fmt.Printf("<div class='content'>%s</div>\n", k.Message)
+	}
+	d, _ := time.ParseDuration(c.Time)
+	fmt.Printf("<p class='duration' title='Test duration'>%v</p>\n", d)
+	fmt.Printf("</div>\n")
+	fmt.Printf("</div>\n")
+}
 
 func main() {
 	suites := &formatter.JUnitTestSuites{}
@@ -19,7 +52,7 @@ func main() {
 	fmt.Println("<head>")
 	fmt.Println("<meta charset=\"UTF-8\">")
 	fmt.Println("<style>")
-	fmt.Println("body {font-family: sans-serif}")
+	fmt.Println(styles)
 	fmt.Println("</style>")
 	fmt.Println("</head>")
 	fmt.Println("<body>")
@@ -31,23 +64,34 @@ func main() {
 	fmt.Printf("<p>%d of %d tests failed</p>\n", failures, total)
 	for _, s := range suites.Suites {
 		if s.Failures > 0 {
-			fmt.Printf("<h2>%s</h2>\n", s.Name)
+			printSuiteHeader(s)
 			for _, c := range s.TestCases {
 				if f := c.Failure; f != nil {
-					fmt.Printf("<p><span style='color:red'>𒒬</span> %s</p>\n", c.Name)
-					fmt.Printf("<pre>%s</pre>\n", f.Contents)
+					printTest(s, c)
 				}
 			}
 		}
 	}
 	for _, s := range suites.Suites {
-		fmt.Printf("<h2>%s</h2>\n", s.Name)
+		printSuiteHeader(s)
 		for _, c := range s.TestCases {
 			if c.Failure == nil {
-				fmt.Printf("<p><span style='color:green'>✔</span> %s</p>\n", c.Name)
+				printTest(s, c)
 			}
 		}
 	}
 	fmt.Println("</body>")
 	fmt.Println("</html>")
+}
+
+func printSuiteHeader(s formatter.JUnitTestSuite) {
+	fmt.Println("<h4>")
+	fmt.Println(s.Name)
+	for _, p := range s.Properties {
+		if strings.HasPrefix(p.Name, "coverage.") {
+			v, _ := strconv.ParseFloat(p.Value, 10)
+			fmt.Printf("<span class='coverage' title='%s'>%.0f%%</span>\n", p.Name, v)
+		}
+	}
+	fmt.Println("</h4>")
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+	<testsuite tests="4" failures="2" time="0.129" name="github.com/alexec/junit2html/example">
+		<properties>
+			<property name="go.version" value="go1.18.1"></property>
+		</properties>
+		<testcase classname="example" name="TestPassing" time="0.000"></testcase>
+		<testcase classname="example" name="TestFailing" time="0.000">
+			<failure message="Failed" type="">    example_test.go:10: this test failed</failure>
+		</testcase>
+		<testcase classname="example" name="TestSkipped" time="0.000">
+			<skipped message="    example_test.go:14: this test is skipped"></skipped>
+		</testcase>
+		<testcase classname="example" name="TestPanic" time="0.000">
+			<failure message="Failed" type="">panic: kaboom!&#xA;/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1389 +0x24e&#xA;/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1392 +0x39f&#xA;/usr/local/Cellar/go/1.18.1/libexec/src/runtime/panic.go:838 +0x207&#xA;/Users/acollins8/go/src/github.com/alexec/junit2html/example/example.go:10&#xA;/Users/acollins8/go/src/github.com/alexec/junit2html/example/example_test.go:18 +0x31&#xA;/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1439 +0x102&#xA;/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1486 +0x35f</failure>
+		</testcase>
+	</testsuite>
+	<testsuite tests="1" failures="0" time="0.000" name="github.com/alexec/junit2html/example/coverage">
+		<properties>
+			<property name="go.version" value="go1.18.1"></property>
+			<property name="coverage.statements.pct" value="50.0"></property>
+		</properties>
+		<testcase classname="coverage" name="TestCoverage" time="0.000"></testcase>
+	</testsuite>
+</testsuites>
