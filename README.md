@@ -7,6 +7,8 @@ Convert Junit XML reports (`junit.xml`) into HTML reports using Golang.
 * No JavaScript.
 * Look gorgeous.
 
+## Screenshot
+
 ![screenshot](screenshot.png)
 
 ## Usage
