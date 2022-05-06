@@ -28,7 +28,7 @@ func main() {
 		failures += s.Failures
 		total += len(s.TestCases)
 	}
-	fmt.Printf("<p>%d failure of %d tests</p>\n", failures, total)
+	fmt.Printf("<p>%d of %d tests failed</p>\n", failures, total)
 	for _, s := range suites.Suites {
 		if s.Failures > 0 {
 			fmt.Printf("<h2>%s</h2>\n", s.Name)
