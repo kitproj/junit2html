@@ -26,9 +26,9 @@ func printTest(s formatter.JUnitTestSuite, c formatter.JUnitTestCase) {
 	if k != nil {
 		class, text = "skipped", "Skip"
 	}
-	fmt.Printf("<div class='%s'>\n", class)
+	fmt.Printf("<div class='%s' id='%s'>\n", class, id)
 	fmt.Printf("<a href='#%s'>%s <span class='badge'>%s</span></a>\n", id, c.Name, text)
-	fmt.Printf("<div class='expando' id='%s'>\n", id)
+	fmt.Printf("<div class='expando'>\n")
 	if f != nil {
 		fmt.Printf("<div class='content'>%s</div>\n", f.Contents)
 	} else if k != nil {

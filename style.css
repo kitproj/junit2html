@@ -69,6 +69,6 @@ a {
     font-size: x-small;
 }
 
-.expando:target {
+div:target .expando {
     display: block
 }
