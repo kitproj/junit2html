@@ -34,4 +34,10 @@ How to test this locally:
 go test -v -cover ./... 2>&1 > test.out
 go-junit-report < test.out > junit.xml 
 go run . < junit.xml > test-report.html 
+# alternatively using flags 
+go run . -xml-result junit.xml -html-report test-report.html
+
+# optional for Windows
+env GOOS=windows GOARCH=amd64 go build -o ~/junit2html.exe
+junit2html.exe -xml-result junit.xml -html-report test-report.html
 ```
