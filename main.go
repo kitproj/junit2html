@@ -1,10 +1,14 @@
 package main
 
 import (
+	"bytes"
 	_ "embed"
 	"encoding/xml"
+	"flag"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -40,12 +44,44 @@ func printTest(s formatter.JUnitTestSuite, c formatter.JUnitTestCase) {
 	fmt.Printf("</div>\n")
 }
 
-func main() {
-	suites := &formatter.JUnitTestSuites{}
+// arguments
+var (
+	xmlReports *string
+)
 
-	err := xml.NewDecoder(os.Stdin).Decode(suites)
-	if err != nil {
-		panic(err)
+func init() {
+	xmlReports = flag.String("xmlReports", "", "Comma delimited glob expressions describing the files to scan")
+}
+
+func main() {
+	flag.Parse()
+	if (*xmlReports) == "" {
+		panic("xmlReports cannot be empty")
+	}
+	patterns := strings.Split((*xmlReports), ",")
+	files := []string{}
+	for _, p := range patterns {
+		fmt.Fprintf(os.Stderr, "Given xmlReports '%s'\n", p)
+		matches, err := filepath.Glob(p)
+		if err != nil {
+			panic(err)
+		}
+		files = append(files, matches...)
+	}
+	allSuites := make([]formatter.JUnitTestSuites, 0, len(files))
+	for _, f := range files {
+		fmt.Fprintf(os.Stderr, "Parsing file '%s'\n", f)
+		res, err := ioutil.ReadFile(f)
+		if err != nil {
+			panic(err)
+		}
+		testResult := bytes.NewReader(res)
+		suites := &formatter.JUnitTestSuites{}
+		err = xml.NewDecoder(testResult).Decode(suites)
+		if err != nil {
+			panic(err)
+		}
+		allSuites = append(allSuites, *suites)
 	}
 
 	fmt.Println("<html>")
@@ -56,27 +92,34 @@ func main() {
 	fmt.Println("</style>")
 	fmt.Println("</head>")
 	fmt.Println("<body>")
+
 	failures, total := 0, 0
-	for _, s := range suites.Suites {
-		failures += s.Failures
-		total += len(s.TestCases)
+	for _, suites := range allSuites {
+		for _, s := range suites.Suites {
+			failures += s.Failures
+			total += len(s.TestCases)
+		}
 	}
 	fmt.Printf("<p>%d of %d tests failed</p>\n", failures, total)
-	for _, s := range suites.Suites {
-		if s.Failures > 0 {
-			printSuiteHeader(s)
-			for _, c := range s.TestCases {
-				if f := c.Failure; f != nil {
-					printTest(s, c)
+	for _, suites := range allSuites {
+		for _, s := range suites.Suites {
+			if s.Failures > 0 {
+				printSuiteHeader(s)
+				for _, c := range s.TestCases {
+					if f := c.Failure; f != nil {
+						printTest(s, c)
+					}
 				}
 			}
 		}
 	}
-	for _, s := range suites.Suites {
-		printSuiteHeader(s)
-		for _, c := range s.TestCases {
-			if c.Failure == nil {
-				printTest(s, c)
+	for _, suites := range allSuites {
+		for _, s := range suites.Suites {
+			printSuiteHeader(s)
+			for _, c := range s.TestCases {
+				if c.Failure == nil {
+					printTest(s, c)
+				}
 			}
 		}
 	}
