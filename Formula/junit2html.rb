@@ -5,20 +5,20 @@
 class Junit2html < Formula
   desc "Crazy fast local dev loop."
   homepage "https://github.com/kitproj/junit2html"
-  version "0.0.5"
+  version "0.1.0"
 
   on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/kitproj/junit2html/releases/download/v0.0.5/junit2html_0.0.5_Darwin_arm64.tar.gz"
-      sha256 "10d33fa94fcffa6d08244830092068874cc5702aa085ffd65a04fe7ca0aa786c"
+    if Hardware::CPU.intel?
+      url "https://github.com/kitproj/junit2html/releases/download/v0.1.0/junit2html_0.1.0_Darwin_x86_64.tar.gz"
+      sha256 "c8338b3f32e4069ae54051d88f2e6f90cece6a4820df49227b5d78cc37e92670"
 
       def install
         bin.install "junit2html"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/kitproj/junit2html/releases/download/v0.0.5/junit2html_0.0.5_Darwin_x86_64.tar.gz"
-      sha256 "6d393f9d16a4e35e2a0398fb06ebaaa261bba0db592cd073a78e2b9b6da448e9"
+    if Hardware::CPU.arm?
+      url "https://github.com/kitproj/junit2html/releases/download/v0.1.0/junit2html_0.1.0_Darwin_arm64.tar.gz"
+      sha256 "da3d8d58dbbdb057d0033f23c5a40bdeef41a7c48766df914fb0598fbd8f702d"
 
       def install
         bin.install "junit2html"
@@ -27,17 +27,17 @@ class Junit2html < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/kitproj/junit2html/releases/download/v0.0.5/junit2html_0.0.5_Linux_arm64.tar.gz"
-      sha256 "eaa26ce5ed062ecafc53943f2a778fee2b34fd493b72a0f01d5d11e4b014b128"
+    if Hardware::CPU.intel?
+      url "https://github.com/kitproj/junit2html/releases/download/v0.1.0/junit2html_0.1.0_Linux_x86_64.tar.gz"
+      sha256 "f6ed57332baa27d089cf70ca5e0ae17c81109a317e983ceac3750f5938df7dd3"
 
       def install
         bin.install "junit2html"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/kitproj/junit2html/releases/download/v0.0.5/junit2html_0.0.5_Linux_x86_64.tar.gz"
-      sha256 "4e3a2fdecb7213d92410c516720de9e5192f30b32cd22e9a05b8b1d1d9c5c74b"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/kitproj/junit2html/releases/download/v0.1.0/junit2html_0.1.0_Linux_arm64.tar.gz"
+      sha256 "7a120ebf0a8907bc12efe9790715d8bf77cc5e10fdab9179a92b7daffdabd8e1"
 
       def install
         bin.install "junit2html"
