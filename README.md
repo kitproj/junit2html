@@ -1,6 +1,6 @@
 # junit2html
 
-Convert Junit XML reports (`junit.xml`) into HTML reports using Golang.
+Convert Junit XML reports (`junit.xml`) into HTML reports using a single standalone binary.
 
 * Standalone binary.
 * Failed tests are top, that's what's important.
