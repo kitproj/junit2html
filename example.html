@@ -1,0 +1,134 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body {
+    font-family: "Helvetica", sans-serif;
+    margin: 16px 64px
+}
+
+h4 {
+    padding: 4px 8px;
+}
+
+
+.coverage {
+    font-size: small;
+    font-weight: normal;
+}
+
+a {
+    padding: 8px 8px;
+    color: black;
+    text-decoration: none;
+    display: block;
+    border: thin #eeeeee solid;
+}
+
+
+.passed a {
+    background-color: #dfd;
+}
+
+.skipped a {
+    background-color: #eee;
+}
+
+.failed a {
+    background-color: #fdd;
+}
+
+.badge {
+    background-color: #888;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 8px;
+    float: right;
+}
+
+.passed .badge {
+    background-color: #5c5;
+}
+
+.skipped .badge {
+}
+
+.failed .badge {
+    background-color: #d66;
+}
+
+.expando {
+    padding: 8px;
+    display: none;
+}
+
+.content {
+    padding: 16px 0;
+    border-bottom: thin #eeeeee solid;
+    color: #444;
+    white-space: pre;
+}
+
+.duration {
+    font-size: x-small;
+}
+
+div:target .expando {
+    display: block
+}
+</style>
+</head>
+<body>
+<p>2 of 5 tests failed</p>
+<h4>
+github.com/alexec/junit2html/example
+</h4>
+<div class='failed' id='github.com/alexec/junit2html/example.example.TestFailing'>
+<a href='#github.com/alexec/junit2html/example.example.TestFailing'>TestFailing <span class='badge'>Fail</span></a>
+<div class='expando'>
+<div class='content'>    example_test.go:10: this test failed</div>
+<p class='duration' title='Test duration'>0s</p>
+</div>
+</div>
+<div class='failed' id='github.com/alexec/junit2html/example.example.TestPanic'>
+<a href='#github.com/alexec/junit2html/example.example.TestPanic'>TestPanic <span class='badge'>Fail</span></a>
+<div class='expando'>
+<div class='content'>panic: kaboom!
+/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1389 +0x24e
+/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1392 +0x39f
+/usr/local/Cellar/go/1.18.1/libexec/src/runtime/panic.go:838 +0x207
+/Users/acollins8/go/src/github.com/alexec/junit2html/example/example.go:10
+/Users/acollins8/go/src/github.com/alexec/junit2html/example/example_test.go:18 +0x31
+/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1439 +0x102
+/usr/local/Cellar/go/1.18.1/libexec/src/testing/testing.go:1486 +0x35f</div>
+<p class='duration' title='Test duration'>0s</p>
+</div>
+</div>
+<h4>
+github.com/alexec/junit2html/example
+</h4>
+<div class='passed' id='github.com/alexec/junit2html/example.example.TestPassing'>
+<a href='#github.com/alexec/junit2html/example.example.TestPassing'>TestPassing <span class='badge'>Pass</span></a>
+<div class='expando'>
+<p class='duration' title='Test duration'>0s</p>
+</div>
+</div>
+<div class='skipped' id='github.com/alexec/junit2html/example.example.TestSkipped'>
+<a href='#github.com/alexec/junit2html/example.example.TestSkipped'>TestSkipped <span class='badge'>Skip</span></a>
+<div class='expando'>
+<div class='content'>    example_test.go:14: this test is skipped</div>
+<p class='duration' title='Test duration'>0s</p>
+</div>
+</div>
+<h4>
+github.com/alexec/junit2html/example/coverage
+<span class='coverage' title='coverage.statements.pct'>50%</span>
+</h4>
+<div class='passed' id='github.com/alexec/junit2html/example/coverage.coverage.TestCoverage'>
+<a href='#github.com/alexec/junit2html/example/coverage.coverage.TestCoverage'>TestCoverage <span class='badge'>Pass</span></a>
+<div class='expando'>
+<p class='duration' title='Test duration'>0s</p>
+</div>
+</div>
+</body>
+</html>
